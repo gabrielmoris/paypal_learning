@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <Payment v-else />
+    <Payment v-else :product="selected" />
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
         .then((res) => res.json())
         .then((json) => {
           this.selected = json;
-          // console.log(json);
+          console.log(json);
         });
     },
     api() {

@@ -1,13 +1,19 @@
 <template>
   <div class="flex flex-col items-center justify-center mt-10">
     <div v-if="!paidFor">
-      <h1>Buy this Lamp - ${{ product.price }} OBO</h1>
-
-      <p>{{ product.description }}</p>
+      <h1 class="text-bold text-xl text-center pb-20">
+        Buy this {{ product.title + " for " + product.price }} €
+      </h1>
+      <div
+        class="h-[400px] rounded-t-xl"
+        :style="`background-image: url(${product.image}); background-position: center;background-size: contain; background-repeat: no-repeat;`"
+        :title="product.title"
+      ></div>
+      <p class="px-[200px] pt-20">{{ product.description }}</p>
     </div>
 
     <div v-if="paidFor">
-      <h1>Noice, you bought a beautiful lamp!</h1>
+      <h1>{{ product.title }}</h1>
     </div>
 
     <div class="p-20" ref="paypal"></div>
@@ -18,16 +24,11 @@
 // import image from "../assets/lamp.png"
 export default {
   name: "Payment",
-
+  props: ["product"],
   data: function () {
     return {
       loaded: false,
       paidFor: false,
-      product: {
-        price: 777.77,
-        description: "leg lamp from that one movie",
-        img: "../assets/vue.svg",
-      },
     };
   },
   mounted: function () {
@@ -49,7 +50,7 @@ export default {
                 {
                   description: this.product.description,
                   amount: {
-                    currency_code: "EUR",
+                    currency_code: "USD",
                     value: this.product.price,
                   },
                 },
