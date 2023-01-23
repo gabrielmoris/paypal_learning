@@ -2,18 +2,18 @@
   <div class="flex flex-col items-center justify-center mt-10">
     <div v-if="!paidFor">
       <h1 class="text-bold text-xl text-center pb-20">
-        Buy this {{ product.title + " for " + product.price }} €
+        Buy this {{ productChoice.title + " for " + productChoice.price }} €
       </h1>
       <div
         class="h-[400px] rounded-t-xl"
-        :style="`background-image: url(${product.image}); background-position: center;background-size: contain; background-repeat: no-repeat;`"
-        :title="product.title"
+        :style="`background-image: url(${productChoice.image}); background-position: center;background-size: contain; background-repeat: no-repeat;`"
+        :title="productChoice.title"
       ></div>
-      <p class="px-[200px] pt-20">{{ product.description }}</p>
+      <p class="px-[200px] pt-20">{{ productChoice.description }}</p>
     </div>
 
     <div v-if="paidFor">
-      <h1>{{ product.title }}</h1>
+      <h1>{{ productChoice.title }}</h1>
     </div>
 
     <div class="p-20" ref="paypal"></div>
@@ -24,7 +24,7 @@
 // import image from "../assets/lamp.png"
 export default {
   name: "Payment",
-  props: ["product"],
+  props: ["productChoice"],
   data: function () {
     return {
       loaded: false,
@@ -48,10 +48,10 @@ export default {
             return actions.order.create({
               purchase_units: [
                 {
-                  description: this.product.description,
+                  description: this.productChoice.title,
                   amount: {
                     currency_code: "USD",
-                    value: this.product.price,
+                    value: this.productChoice.price,
                   },
                 },
               ],

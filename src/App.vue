@@ -8,7 +8,7 @@
     <div v-if="JSON.stringify(selected) === '{}'" class="grid grid-cols-3">
       <div
         v-for="item in items"
-        class="m-5 p-5 flex flex-col cursor-pointer border rounded-xl border-gray-400"
+        class="m-5 p-5 flex flex-col cursor-pointer border rounded-xl border-gray-400 hover:shadow-xl hover:bottom-1 hover:right-1 hover:relative"
         :id="item.id"
         @click.prevent="click(item.id)"
       >
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <Payment v-else :product="selected" />
+    <Payment v-else :productChoice="selected" />
   </div>
 </template>
 
